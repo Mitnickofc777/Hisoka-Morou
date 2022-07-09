@@ -1,9 +1,3 @@
-/**
-   * Create By Dika Ardnt.
-   * Contact Me on wa.me/6288292024190
-   * Follow https://github.com/DikaArdnt
-*/
-
 const fs = require('fs')
 const chalk = require('chalk')
 
@@ -14,34 +8,34 @@ global.APIs = {
 
 // Apikey Website Api
 global.APIKeys = {
-	'https://zenzapis.xyz': 'Your Key',
+	'https://zenzapis.xyz': 'd0508fea44',
 }
 
 // Other
-global.owner = ['6283167714830','6281382420312','6287721317870','6288292024190']
-global.premium = ['6288292024190']
-global.packname = 'Hisoka Morrow'
-global.author = 'WhatsApp Bot'
-global.sessionName = 'hisoka'
-global.prefa = ['','!','.','🐦','🐤','🗿']
-global.sp = '⭔'
+global.owner = ['919895823783', '687718888', '687958182', '919072716363']
+global.premium = ['919895823783', '919072716373']
+global.packname = 'idk'
+global.author = 'u4d'
+global.sessionName = 'skk'
+global.prefa = ['','!','.','🐦','🐤','🗿','#']
+global.sp = '🌼'
 global.mess = {
-    success: '✓ Success',
-    admin: 'Fitur Khusus Admin Group!',
-    botAdmin: 'Bot Harus Menjadi Admin Terlebih Dahulu!',
-    owner: 'Fitur Khusus Owner Bot',
-    group: 'Fitur Digunakan Hanya Untuk Group!',
-    private: 'Fitur Digunakan Hanya Untuk Private Chat!',
-    bot: 'Fitur Khusus Pengguna Nomor Bot',
-    wait: 'Loading...',
-    endLimit: 'Limit Harian Anda Telah Habis, Limit Akan Direset Setiap Jam 12',
+    success: '⚡𝕾𝖚𝖈𝖈𝖊𝖘𝖘 𝖊𝖓𝖏𝖔𝖞',
+    admin: 'Group Admin Special Features!',
+    botAdmin: 'Bot Must Be Admin First!',
+    owner: 'Owner Bots Special Features',
+    group: 'Features Used Only For Groups!',
+    private: 'Features Used Only For Private Chat!',
+    bot: 'Bot Number User Special Features',
+    wait: '🧑🏻‍🦯𝕷𝖔𝖆𝖉𝖎𝖓𝖌 𝖊𝖓𝖏𝖔𝖞...',
+    endLimit: 'Your Daily Limit Has Expired, The Limit Will Be Reset Every Hour 12',
 }
 global.limitawal = {
     premium: "Infinity",
-    free: 100
+    free: 444
 }
 global.thumb = fs.readFileSync('./lib/hisoka.jpg')
-global.visoka = { url: 'https://telegra.ph/file/15209657f9d4f59c7ca1e.mp4' }
+global.visoka = { url: 'https://telegra.ph/file/e6f6b8ee6289a8f94894b.mp4' }
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
