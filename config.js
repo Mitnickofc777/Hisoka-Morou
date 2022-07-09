@@ -1,9 +1,3 @@
-/**
-   * Create By Dika Ardnt.
-   * Contact Me on wa.me/6288292024190
-   * Follow https://github.com/DikaArdnt
-*/
-
 const fs = require('fs')
 const chalk = require('chalk')
 
@@ -26,14 +20,14 @@ global.sessionName = 'skk'
 global.prefa = ['','!','.','🐦','🐤','🗿','#']
 global.sp = '🌼'
 global.mess = {
-    success: '𝕾𝖚𝖈𝖈𝖊𝖘𝖘 𝖊𝖓𝖏𝖔𝖞',
+    success: '⚡𝕾𝖚𝖈𝖈𝖊𝖘𝖘 𝖊𝖓𝖏𝖔𝖞',
     admin: 'Group Admin Special Features!',
     botAdmin: 'Bot Must Be Admin First!',
-    owner: 'Owner Bot's Special Features',
+    owner: 'Owner Bots Special Features',
     group: 'Features Used Only For Groups!',
     private: 'Features Used Only For Private Chat!',
     bot: 'Bot Number User Special Features',
-    wait: '𝕷𝖔𝖆𝖉𝖎𝖓𝖌 𝖊𝖓𝖏𝖔𝖞...',
+    wait: '🧑🏻‍🦯𝕷𝖔𝖆𝖉𝖎𝖓𝖌 𝖊𝖓𝖏𝖔𝖞...',
     endLimit: 'Your Daily Limit Has Expired, The Limit Will Be Reset Every Hour 12',
 }
 global.limitawal = {
