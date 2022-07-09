@@ -14,8 +14,8 @@ global.APIKeys = {
 // Other
 global.owner = ['919895823783', '687718888', '687958182', '919072716363']
 global.premium = ['919895823783', '919072716373']
-global.packname = 'idk'
-global.author = 'u4d'
+global.packname = 'SHARU'
+global.author = 'MITNICK🦜'
 global.sessionName = 'skk'
 global.prefa = ['','!','.','🐦','🐤','🗿','#']
 global.sp = '🌼'
