@@ -21,6 +21,9 @@ const { Primbon } = require('scrape-primbon')
 const primbon = new Primbon()
 const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom, getGroupAdmins } = require('./lib/myfunc')
 
+// audio json by lua
+let testaudio = JSON.parse(fs.readFileSync('./file/json/audio.json'))
+
 // read database
 let tebaklagu = db.data.game.tebaklagu = []
 let _family100 = db.data.game.family100 = []
@@ -50,6 +53,9 @@ module.exports = hisoka = async (hisoka, m, chatUpdate, store) => {
         const quoted = m.quoted ? m.quoted : m
         const mime = (quoted.msg || quoted).mimetype || ''
         const isMedia = /image|video|sticker|audio/.test(mime)
+
+        //auto reply 
+        const Autoreply = m.isGroup ? autorep.includes(from) : true
 	
         // Group
         const groupMetadata = m.isGroup ? await hisoka.groupMetadata(m.chat).catch(e => {}) : ''
@@ -112,6 +118,11 @@ module.exports = hisoka = async (hisoka, m, chatUpdate, store) => {
             console.error(err)
         }
 	    
+         //reply fake
+         const replay = (teks) => {
+            hisoka.sendMessage(m.chat, { text: teks, contextInfo:{"externalAdReply": {"title": `bad-bot`,"body": `By mitnick`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": fs.readFileSync(`./lib/mitnick.jpg`),"sourceUrl": `github.com/xxirfanx`}}}, { quoted: m})
+        }
+
         // Public & Self
         if (!hisoka.public) {
             if (!m.key.fromMe) return
@@ -159,6 +170,14 @@ module.exports = hisoka = async (hisoka, m, chatUpdate, store) => {
         hisoka.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
         }
         }
+
+      if (Autoreply) //remove forwad slashes to make it autoreply on off
+			for (let anju of testaudio){
+				if (budy === anju){
+					result = fs.readFileSync(`./file/audio/${anju}.mp3`)
+					hisoka.sendMessage(m.chat, { audio: result, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
+					}
+			}
         
       // Mute Chat
       if (db.data.chats[m.chat].mute && !isAdmins && !isCreator) {
@@ -1491,31 +1510,6 @@ break
                 await fs.unlinkSync(media)
             }
             break
-            case 'imagenobg': case 'removebg': case 'remove-bg': {
-	    if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-	    if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-	    if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-	    let remobg = require('remove.bg')
-	    let apirnobg = ['q61faXzzR5zNU6cvcrwtUkRU','S258diZhcuFJooAtHTaPEn4T','5LjfCVAp4vVNYiTjq9mXJWHF','aT7ibfUsGSwFyjaPZ9eoJc61','BY63t7Vx2tS68YZFY6AJ4HHF','5Gdq1sSWSeyZzPMHqz7ENfi8','86h6d6u4AXrst4BVMD9dzdGZ','xp8pSDavAgfE5XScqXo9UKHF','dWbCoCb3TacCP93imNEcPxcL']
-	    let apinobg = apirnobg[Math.floor(Math.random() * apirnobg.length)]
-	    hmm = await './src/remobg-'+getRandom('')
-	    localFile = await hisoka.downloadAndSaveMediaMessage(quoted, hmm)
-	    outputFile = await './src/hremo-'+getRandom('.png')
-	    m.reply(mess.wait)
-	    remobg.removeBackgroundFromImageFile({
-	      path: localFile,
-	      apiKey: apinobg,
-	      size: "regular",
-	      type: "auto",
-	      scale: "100%",
-	      outputFile 
-	    }).then(async result => {
-	    hisoka.sendMessage(m.chat, {image: fs.readFileSync(outputFile), caption: mess.success}, { quoted : m })
-	    await fs.unlinkSync(localFile)
-	    await fs.unlinkSync(outputFile)
-	    })
-	    }
-	    break
 	    case 'yts': case 'ytsearch': {
                 if (!text) throw `Example : ${prefix + command} story wa anime`
                 let yts = require("yt-search")
@@ -2399,6 +2393,28 @@ ${Object.entries(global.db.data.sticker).map(([key, value], index) => `${index +
                 hisoka.sendText(m.chat, teks, m, { mentions: Object.values(global.db.data.sticker).map(x => x.mentionedJid).reduce((a,b) => [...a, ...b], []) })
             }
             break
+            case 'autoreply': {
+if (!m.isGroup) return replay(mess.group)
+if (!isBotAdmins) return replay(mess.botAdmin)
+if (!isAdmins && !isCreator) return replay(mess.admin)
+if (args[0] === "on") {
+if (Autoreply) return replay('Already activated')
+autorep.push(from)
+replay('Success in turning on the autoreply in this group')
+} else if (args[0] === "off") {
+if (!Autoreply) return replay('Already deactivated')
+let off = autorep.indexOf(from)
+autorep.splice(off, 1)
+replay('Success in turning off autoreply in this group')
+} else {
+  let buttonswlcm = [
+  { buttonId: `${command} on`, buttonText: { displayText: 'On' }, type: 1 },
+  { buttonId: `${command} off`, buttonText: { displayText: 'Off' }, type: 1 }
+  ]
+  await hisoka.sendButtonText(m.chat, buttonswlcm, `Please click the button below\n\nOn to enable\nOff to disable`, `By lua cheia`, m)
+  }
+  }
+  break
             case 'lockcmd': {
                 if (!isCreator) throw mess.owner
                 if (!m.quoted) throw 'Reply Pesan!'
